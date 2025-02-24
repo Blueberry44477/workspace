@@ -7,14 +7,9 @@ private:
     int m_year;
 public:
     Car(const string &mark = "", int id = 0, int year = 0)
-        :m_mark{mark}, m_year{year} { 
-            m_id = new int;
-            *m_id = id;
-    }
-    Car(const Car &other):m_mark{other.m_mark}, m_year{other.m_year} {
-        m_id = new int;
-        *m_id = *other.m_id;
-    }
+        :m_mark{mark}, m_id{new int{id}}, m_year{year}  {}
+    Car(const Car &other)
+        :m_mark{other.m_mark}, m_id{new int{*other.m_id}}, m_year{other.m_year}  {}
     ~Car() { delete m_id; }
     void show() {
         cout << "Mark: " << m_mark << "\nID: " << *m_id << "\nYear: " << m_year << '\n';
@@ -30,9 +25,9 @@ class Customer {
 private:
     string m_name;
     int m_customer_id;
-    double m_phone_number;
+    int m_phone_number;
 public:
-    Customer(const string &name, int id, double phone_number)
+    Customer(const string &name, int id, int phone_number)
         : m_name{name}, m_customer_id{id}, m_phone_number{phone_number} {}
     Customer(string name, int id): Customer(name, id, 0) {}
     Customer(string name): Customer(name, 0, 0) {}
@@ -55,7 +50,7 @@ public:
     Rental_agreement(double id = 0, const Customer &customer = Customer(), const Car &car = Car())
         :m_agreement_id{id}, m_customer{customer}, m_car{car} {}
     void get_details() {
-        cout << "Agreement ID: " << m_agreement_id << "\nCustomer: " << m_customer << "\nCar: " << m_car << '\n';
+        cout << "Agreement ID: " << m_agreement_id << "\nCustomer: \n" << m_customer << "\nCar: \n" << m_car << '\n';
     }
 };
 int main() {
