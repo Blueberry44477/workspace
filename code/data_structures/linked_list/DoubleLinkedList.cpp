@@ -53,7 +53,7 @@ void DoubleLinkedList::insertAtIndex(int index, int value) {
 int DoubleLinkedList::operator[](int index) const {
     checkIndex(index);
     shared_ptr<double_node::Node> current = head;
-    for (int i = 0; i < index - 1; i++) {
+    for (int i = 0; i < index; i++) {
         current = current->next;
     }
     return current->data;

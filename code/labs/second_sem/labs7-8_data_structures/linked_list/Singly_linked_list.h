@@ -9,14 +9,14 @@ template<typename T>
 class Singly_linked_list {
 private:
     std::unique_ptr<Node<T>> m_head;
-    size_t m_size;
+    size_t m_size{};
     void check_index(size_t index) const {
         if (index < 0 || index >= m_size)
             throw std::out_of_range("Index is out of range");
     };
 public:
     Singly_linked_list(): m_head{nullptr}, m_size{} {};
-    Singly_linked_list(const T value)
+    Singly_linked_list(const T &value)
         :m_head{std::make_unique<Node<T>>(value)}, m_size{1} {};
 
     Singly_linked_list(const std::initializer_list<T> &init_list) {
@@ -38,11 +38,10 @@ public:
         auto new_node = std::make_unique<Node<T>>(value);
         if(!m_head) {
             m_head = std::move(new_node);
-            m_size++;
-            return;
+        } else {
+            new_node->m_next = std::move(m_head);
+            m_head = std::move(new_node);
         }
-        new_node->m_next = std::move(m_head);
-        m_head = std::move(new_node);
         m_size++;
     }
 
@@ -85,7 +84,7 @@ public:
         m_size--;
     }
 
-    const T& operator[](const int index) const {
+    const T& operator[](const size_t index) const {
         check_index(index);
         Node<T> *current = m_head.get();
         for (size_t i = 0; i < index; i++)
@@ -123,9 +122,9 @@ public:
             return;
         }
         Node<T> *current = m_head.get();
-        for (size_t i = 0; i < index - 1; i++)
-            current = current->m_next.get();
-        current->m_next = std::move(current->m_next->m_next);
+        for (size_t i = 0; i < index - 1; i++) //отримали list[index-1]
+            current = current->m_next.get(); 
+        current->m_next = std::move(current->m_next->m_next); //замінили list[index] на list[index+1]
         m_size--;
     }
 
@@ -174,15 +173,15 @@ public:
     }
 
     size_t count(const T& value) const {
-    size_t counter = 0;
-    auto current = m_head.get();
-    while (current) {
-        if (current->m_data == value) {
-            counter++;
-        }
+        size_t counter = 0;
+        auto current = m_head.get();
+        while (current) {
+            if (current->m_data == value) {
+                counter++;
+            }
         current = current->m_next.get();
-    }
-    return counter;
+        }
+        return counter;
     }
 };
 

@@ -1,7 +1,6 @@
 *
 !/**/
 !*.*
-*.vscode
 *.sln
 *.vcxproj
 *.vcxproj.filters
@@ -37,8 +36,8 @@
 *.ipdb
 *.VC.db-wal
 *.VC.db-shm
-Предмети - корисне/
-Books/
+books/other/
+books/
 # Залишаємо тільки файли з розширенням .cpp
 !*.cpp
-
+!*.vscode
