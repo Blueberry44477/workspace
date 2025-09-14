@@ -80,7 +80,7 @@ bool is_palindrome(const std::deque<T> &deque) {
     return true;
 }
 
-//4
+//4 Зсув елементів
 template<typename T, size_t N>
 void rotate(std::array<T, N>& arr, size_t shift) {
     shift %= N;
@@ -92,7 +92,7 @@ void rotate(std::array<T, N>& arr, size_t shift) {
     }
 }
 
-//5
+//5 Вставка діапазону
 template<typename T>
 void insert_at(std::vector<T> &giver, std::vector<T> &receiver, const size_t pos) {
     auto it_giv = giver.begin();
@@ -103,7 +103,7 @@ void insert_at(std::vector<T> &giver, std::vector<T> &receiver, const size_t pos
 
 }
 
-//6
+//6 Видалити середній елемент
 template<typename T>
 void remove_middle(std::deque<T> &deque) {
     if(deque.size() == 0) 
@@ -116,8 +116,7 @@ void remove_middle(std::deque<T> &deque) {
         deque.erase(deque.begin() + deque.size() / 2);
 }
 
-//part2
-//var11-20
+//part2 var11-20
 //1 Підрядок мінімального діапазону
 //Знайти найменший діапазон символів в рядку, який містить всі символи іншого рядка.
 std::string find_min_string(const std::string &given, const std::string &to_search) {
@@ -183,7 +182,7 @@ std::string find_min_string(const std::string &given, const std::string &to_sear
 
 
 
-//2---------------------------------------------------------------------------------------------
+//2 Планувальник завдань
 class Task_scheduler {
 private:
     std::unordered_map<std::string, int> m_last_execution;
@@ -217,7 +216,7 @@ public:
         }
     }
 };
-//3
+//3 Розташовування гравців в рейтинговій таблиці
 void show_rating(const std::map<int, std::string, std::greater<int>> &players) {
     std::cout << "\n\nPlayers rating\n" 
             << "Player \tRate\n";
@@ -225,14 +224,16 @@ void show_rating(const std::map<int, std::string, std::greater<int>> &players) {
         std::cout << name << '\t' << score << '\n';
     }
 }
-//4
+//4 Подібність речень
 int count_common_words(const std::string& s1, const std::string& s2) {
     auto build_freq = [](const std::string& text) {
         std::unordered_map<std::string, int> freq;
         std::istringstream iss(text);
         std::for_each(std::istream_iterator<std::string>(iss),
                       std::istream_iterator<std::string>(),
-                      [&freq](const std::string& word) { freq[word]++; });
+                      [&freq](const std::string& word) { 
+                        freq[word]++; 
+                    });
         return freq;
     };
 
@@ -240,7 +241,7 @@ int count_common_words(const std::string& s1, const std::string& s2) {
     auto freq2 = build_freq(s2);
 
     int count = 0;
-    for (const auto& [word, freq_in_first] : freq1) {
+    for (const auto &[word, freq_in_first] : freq1) {
         if (freq2.count(word)) {
             count += std::min(freq_in_first, freq2[word]);
         }
@@ -249,40 +250,36 @@ int count_common_words(const std::string& s1, const std::string& s2) {
     return count;
 }
 
-//5
+//5 Мнемотехніка номера телефону
 std::vector<std::string> mnemonic_combinations(const std::string& digits) {
     if (digits.empty()) 
         throw std::invalid_argument("Input is empty");
-
     // T9-мапінг
     const std::unordered_map<char, std::string> digit_to_letters = {
         {'2', "abc"}, {'3', "def"}, {'4', "ghi"},
         {'5', "jkl"}, {'6', "mno"}, {'7', "pqrs"},
         {'8', "tuv"}, {'9', "wxyz"}
     };
-
     for (char ch : digits) {
         if (!digit_to_letters.count(ch))
             throw std::invalid_argument("Digits must be in range 2–9");
     }
-
     std::vector<std::string> result;
     std::string current;
-
+    //не auto бо рекурсія
+    //сходи вперед - повернися назад
     std::function<void(size_t)> backtrack = [&](size_t index) {
         if (index == digits.size()) {
             result.push_back(current);
             return;
         }
-
-        const std::string& letters = digit_to_letters.at(digits[index]);
+        const std::string &letters = digit_to_letters.at(digits[index]);
         for (char letter : letters) {
             current.push_back(letter);
             backtrack(index + 1);
-            current.pop_back();
+            current.pop_back(); //щоб отримати всі можливі варіації
         }
     };
-
     backtrack(0);
     return result;
 }
@@ -316,32 +313,32 @@ int main() {
     // std::deque<char> deq1{'a','b','a'};
     // std::cout << "Deque is a palindrome? - " << std::boolalpha << is_palindrome(deq1) << '\n';
     
-    // //4
-    // const int rotation_number{2};
-    // std::cout << "\nTask4:\n";
-    // std::array<int,5> arr{0,1,2,3,4};
-    // std::cout << "Before rotation: ";
-    // show(arr);
-    // rotate(arr, rotation_number);
-    // std::cout << "After " << rotation_number << " rotations: ";
-    // show(arr);
+    //4
+    const int rotation_number{2};
+    std::cout << "\nTask4:\n";
+    std::array<int,5> arr{0,1,2,3,4};
+    std::cout << "Before rotation: ";
+    show(arr);
+    rotate(arr, rotation_number);
+    std::cout << "After " << rotation_number << " rotations: ";
+    show(arr);
     
-    // //5
-    // std::cout << "\nTask5:\n";
-    // std::vector<int> giver{1,2,3,4,5};
-    // std::vector<int> receiver(5);
-    // insert_at(giver,receiver, 3);
-    // std::cout << "Giver: ";
-    // show(giver);
-    // std::cout << "Receiver: ";
-    // show(receiver);
+    //5
+    std::cout << "\nTask5:\n";
+    std::vector<int> giver{1,2,3,4,5};
+    std::vector<int> receiver(5);
+    insert_at(giver,receiver, 3);
+    std::cout << "Giver: ";
+    show(giver);
+    std::cout << "Receiver: ";
+    show(receiver);
 
-    // //6
-    // std::cout << "\nTask6:\n";
-    // std::deque<std::string> deq2{"one", "two", "three", "four"};
-    // show(deq2);
-    // remove_middle(deq2);
-    // show(deq2);
+    //6
+    std::cout << "\nTask6:\n";
+    std::deque<std::string> deq2{"one", "two", "three", "four"};
+    show(deq2);
+    remove_middle(deq2);
+    show(deq2);
 
 
      //part 2
@@ -358,6 +355,7 @@ int main() {
         std::cout << "No valid window was found\n";
     }
     //2
+    
 
     //3
     show_rating(std::map<int, std::string, std::greater<int>>{{100, "Max"}, {300, "Tolya"}, { 200, "Anya"}});

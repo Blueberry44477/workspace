@@ -38,6 +38,33 @@
 *.VC.db-shm
 books/other/
 books/
+
+# C#
+# Build directories
+bin/
+obj/
+
+# Visual Studio files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# NuGet
+*.nupkg
+packages/
+
+# Logs and temp files
+*.log
+*.tmp
+*.cache
+
+# Other IDE / tool files
+*.dbmdl
+*.resharper
+*.ide.*
+
 # Залишаємо тільки файли з розширенням .cpp
 !*.cpp
 !*.vscode

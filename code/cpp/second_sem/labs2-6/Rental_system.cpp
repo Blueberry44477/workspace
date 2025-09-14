@@ -7,6 +7,7 @@
 #include "Customer.h"
 #include "Admin.h"
 #include <algorithm>
+
 Rental_system::Rental_system(
     const std::string &vehicles_file_name, 
     const std::string &history_file_name,
@@ -26,6 +27,7 @@ Rental_system::Rental_system(
         std::cerr << "Failed to read data. " << ex.what() << '\n';
     }
 }
+
 Rental_system::~Rental_system() { 
     if (!m_vehicles.empty()) {
         try {
@@ -42,6 +44,7 @@ Rental_system::~Rental_system() {
         }
     }
 }
+
 void Rental_system::main_menu() {
     enum MENU {
         LOGIN,
