@@ -1,6 +1,4 @@
 ﻿using System;
-
-
 class MyMath
 {
     public string IsInTarget(double x, double y)
