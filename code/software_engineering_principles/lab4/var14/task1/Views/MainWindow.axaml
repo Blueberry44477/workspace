@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task1.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="task1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="task1">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+
+    <Border Background="#8AC926"
+            CornerRadius="10"
+            Padding="15"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+        <StackPanel Margin="10" Spacing="10">
+            <Button Content="ChooseFile" Click="OnBrowseClick"
+                    Padding="10" Background="Purple" CornerRadius="10" 
+                    FontFamily="Arial" FontSize="18"
+                    HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Input Data From File:"
+                       FontFamily="Arial" FontSize="18" FontWeight="Bold"/>
+            
+            <TextBox Name="InputTextBox"
+                    IsReadOnly="True"
+                    Height="150" Width="800"
+                    FontFamily="Arial" FontSize="18"/>
+            
+            <TextBlock Text="Service Life > 50:"
+                       FontFamily="Arial" FontSize="18" FontWeight="Bold"/>
+                       
+            <TextBox Name="OutputTextBox"
+                    IsReadOnly="True"
+                    Height="150" Width="800"
+                    FontFamily="Arial" FontSize="18"/>
+            
+            <Button Content="Save Result" Click="OnSaveClick"
+                    Padding="10" Background="Purple" CornerRadius="10" 
+                    FontFamily="Arial" FontSize="18"
+                    HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Border>
+</Window>
