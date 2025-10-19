@@ -1,0 +1,27 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="task3.MainWindow"
+        Title="task3">
+        
+    <StackPanel Margin="20" Spacing="10">
+
+        <TextBlock Text="Model:"/>
+        <TextBox x:Name="ModelBox"/>
+
+        <TextBlock Text="Flight Hours:"/>
+        <TextBox x:Name="HoursBox"/>
+
+        <TextBlock Text="Reliability (0-1):"/>
+        <TextBox x:Name="ReliabilityBox"/>
+
+        <Button Content="Add Plane" Click="AddPlane_Click"/>
+        <Button Content="Sort by IComparable (Flight Hours)" Click="SortComparable_Click"/>
+        <Button Content="Sort by IComparer (Hours + Reliability)" Click="SortComparer_Click"/>
+
+        <TextBlock Text="Planes:" FontWeight="Bold" Margin="0,10,0,0"/>
+        <ListBox x:Name="PlaneList" Height="200"/>
+    </StackPanel>
+</Window>

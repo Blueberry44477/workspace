@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="task2.MainWindow"
+        Title="task2">
+    <StackPanel Margin="20" Spacing="10">
+        <TextBlock Text="Organization Name:"/>
+        <TextBox Name="NameBox"/>
+
+        <TextBlock Text="Address:"/>
+        <TextBox Name="AddressBox"/>
+
+        <TextBlock Text="Employees:"/>
+        <TextBox Name="EmployeesBox"/>
+
+        <TextBlock Text="Type:"/>
+        <ComboBox Name="TypeBox">
+            <ComboBoxItem Content="Insurance Company"/>
+            <ComboBoxItem Content="Factory"/>
+        </ComboBox>
+
+        <TextBlock Text="Special Field (Insurance Type or Product Type):"/>
+        <TextBox Name="SpecialBox"/>
+
+        <Button Name="CreateButton" Content="Create" Click="Create_Click"/>
+        <TextBlock Name="Output" TextWrapping="Wrap"/>
+    </StackPanel>
+</Window>
