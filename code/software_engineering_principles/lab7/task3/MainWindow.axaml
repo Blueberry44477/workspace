@@ -1,0 +1,34 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="task3.MainWindow"
+        Title="task3">
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="15">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBox Name="DateBox" Watermark="Date (DDMMYYYY))" Width="120"/>
+            <TextBox Name="TimeBox" Watermark="Time (HH:MM:SS)" Width="100"/>
+
+            <ComboBox Name="ReasonBox" Width="160">
+                <ComboBoxItem Content="Software Install"/>
+                <ComboBoxItem Content="Service"/>
+                <ComboBoxItem Content="Malfunction"/>
+            </ComboBox>
+
+            <TextBox Name="UserBox" Watermark="User" Width="150"/>
+            <Button Name="AddBtn" Content="Add" Click="AddReboot_Click" Width="90"/>
+        </StackPanel>
+
+        <ListBox Name="LogList" Grid.Row="1" Margin="0,10,0,10" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Spacing="8">
+            <Button Name="ShowAllBtn" Content="Show All Logs" Click="ShowAll_Click"/>
+            <Button Name="NightBtn" Content="Night Logs" Click="NightBtn_Click"/>
+            <Button Name="LastBtn" Content="Last Reboot" Click="LastBtn_Click"/>
+            <Button Name="FilterBtn" Content="Filter on Date" Click="ShowByDateBtn_Click"/>
+            <Button Name="FilterBetweenBtn" Content="Filter Between Dates" Click="FilterBetweenBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
