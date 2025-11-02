@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task3.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="task3.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="task3">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <StackPanel Margin="20" Spacing="10" HorizontalAlignment="Center">
+        <TextBlock Text="Enter one of the rainbow colors:" FontSize="16" />
+        <TextBox Name="ColorInput" Width="200" Watermark="Enter color" />
+        <Button Content="Show HEX" Width="200" Click="OnCheckClick" />
+        <TextBlock Name="ResultText" FontSize="14" TextWrapping="Wrap" />
+    </StackPanel>
+
+</Window>

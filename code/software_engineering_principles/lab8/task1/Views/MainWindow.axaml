@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="lab8.MainWindow"
+        Title="Task 1">
+
+        <StackPanel HorizontalAlignment="Center" Spacing="10" Margin="10">
+            <TextBox Name="ProductNameBox" Watermark="Product Name" Width="150"/>
+            <TextBox Name="ProductPriceBox" Watermark="Product Price" Width="150"/>
+            <TextBox Name="ProductQuantityBox" Watermark="Product Quantity" Width="150"/>
+            <TextBox Name="ProductCategoryBox" Watermark="Product Category" Width="150"/>
+            
+            <Button Content="Add Product" Click="AddProductClick" Width="150" HorizontalAlignment="Center"/>
+            
+            <ListBox Name="ProductListBox" Height="200"/>
+            <TextBlock Name="AveragePriceBlock" Text="Average Price: 0"/>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Content="Show All Products" Click="ShowAllProductsClick" Width="150"/>
+                <Button Content="Show All Social Products" Click="ShowSocialProductsClick" Width="200"/>
+            </StackPanel>
+        </StackPanel>
+</Window>
