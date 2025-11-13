@@ -1,0 +1,46 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:task1_cs.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="task1_cs.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="task1_cs">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <StackPanel Margin="10" Spacing="8">
+        <TextBlock Text="Input File Path:"/>
+        <TextBox Name="InputPathTextBox"/>
+        <Button Content="Load List1" Click="LoadButton_Click"/>
+
+        <TextBlock Text="List1:"/>
+        <ItemsControl Name="L1ItemsControl">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <Button Content="Process L1 → L2" Click="ProcessButton_Click"/>
+        <TextBlock Text="L2 List:"/>
+        <ItemsControl Name="L2ItemsControl">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <TextBlock Text="Output File Path:"/>
+        <TextBox Name="OutputPathTextBox"/>
+        <Button Content="Save L2 to File" Click="SaveButton_Click"/>
+    </StackPanel>
+</Window>
