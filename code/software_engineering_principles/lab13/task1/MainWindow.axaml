@@ -1,0 +1,27 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="task1.MainWindow"
+        Title="task1">
+
+    <StackPanel Margin="10">
+        <TextBlock Text="Input Text:" Margin="10"/>
+        <TextBox Name="InputTextBox" AcceptsReturn="True" Height="120"/>
+        
+        <TextBlock Text="Output Text:" Margin="10"/>
+        <TextBox Name="OutputTextBox" AcceptsReturn="True" Height="120"/>
+
+        <TextBlock Text="Recognition Output:" Margin="0,10,0,5"/>
+        <TextBox Name="OutputBox" AcceptsReturn="True" Height="200"/>
+
+        <Button Name="LoadButton" Content="Load File" Click="LoadButton_Click"/>
+
+        <Button Name="RecognizeButton" Content="Recognize Numbers" Margin="0,10,0,0"
+                Click="RecognizeButton_Click"/>
+
+        <Button Name="SaveButton" Content="Save Modified File" Margin="0,10,0,0"
+                Click="SaveButton_Click"/>
+    </StackPanel>
+</Window>
