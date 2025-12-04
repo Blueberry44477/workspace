@@ -31,7 +31,7 @@ public partial class MainWindow : Window
         // Found numbers with fields: Start, End, Text.
         List<ModelResult> results = NumberRecognizer.RecognizeNumber(input, Culture.English);
 
-        // Update results.
+        // Recognition Output.
         foreach (var result in results)
         {
             OutputBox.Text +=
@@ -53,6 +53,7 @@ public partial class MainWindow : Window
                                 .Insert(result.Start, value);
         }
 
+        // Update Output Box
         OutputTextBox.Text = modified;
     }
 
