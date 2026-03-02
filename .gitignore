@@ -37,13 +37,6 @@
 *.ipdb
 *.VC.db-wal
 *.VC.db-shm
-books/other/
-books/
-
-# C#
-# Build directories
-bin/
-obj/
 
 # Visual Studio files
 *.user
@@ -65,6 +58,18 @@ packages/
 *.dbmdl
 *.resharper
 *.ide.*
+
+#########################
+# Programming Languages #
+#########################
+
+# C#
+# Build directories
+bin/
+obj/
+
+# Java
+*.class
 
 # Залишаємо тільки файли з розширенням .cpp
 !*.cpp
