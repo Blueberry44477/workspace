@@ -1,4 +1,7 @@
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +32,19 @@ public class TaskResolver {
 
         public String getName() { return name; }
         public List<Person> getFriends() { return friends; }
+    }
+
+    public class Transaction {
+        private double sum;
+        private String category;
+        
+        public Transaction(double sum, String category) {
+            this.sum = sum;
+            this.category = category;
+        }
+        
+        public double getSum() { return sum; }
+        public String getCategory() { return category; }
     }
 
     public static Optional<String> firstTask(List<String> list) {
@@ -86,5 +102,23 @@ public class TaskResolver {
                      .collect(Collectors.toList());
     }
 
+    public void seventhTask() {
+        List<Transaction> transactions = Arrays.asList(
+            new Transaction(100, "Food"),
+            new Transaction(10, "Transport")
+
+        );
+
+        Set<String> targetCategories = Set.of("Food", "Tech");
+
+        Function<List<Transaction>, Map<String, Double>> classifier = list -> list.stream()
+            .filter(t -> targetCategories.contains(t.getCategory()))
+            .collect(Collectors.groupingBy(
+                    Transaction::getCategory,
+                    Collectors.summingDouble(Transaction::getSum)
+        ));
+        
+        Map<String, Double> result = classifier.apply(transactions);
+    }
 
 }
