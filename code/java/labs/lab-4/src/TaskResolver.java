@@ -6,9 +6,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Map;
+import java.util.Objects;
 
 public class TaskResolver {
-    public class Employee {
+    public static class Employee {
         private String name;
         private int salary;
         
@@ -21,10 +22,10 @@ public class TaskResolver {
         public String getName() { return name; }
     }
     
-    public class Person {
+    public static class Person {
         private String name;
         private List<Person> friends;
-
+        
         public Person(String name, List<Person> friends) {
             this.name = name;
             this.friends = friends;
@@ -33,8 +34,8 @@ public class TaskResolver {
         public String getName() { return name; }
         public List<Person> getFriends() { return friends; }
     }
-
-    public class Transaction {
+    
+    public static class Transaction {
         private double sum;
         private String category;
         
@@ -47,6 +48,19 @@ public class TaskResolver {
         public String getCategory() { return category; }
     }
 
+    public static class Product {
+        private String name;
+        private double price;
+        
+        public Product(String name, double price) {
+            this.name = name;
+            this.price = price;
+        }
+        
+        public double getPrice() { return price; }
+        public String getName() { return name; }
+    }
+
     public static Optional<String> firstTask(List<String> list) {
 
         return list.stream()
@@ -56,7 +70,6 @@ public class TaskResolver {
             .or(() -> Optional.of("Default"));
     }
 
-    // Звести список до списку цілих чисел.
     public static List<Integer> secondTask(List<Optional<Integer>> list) {
 
         // return list.stream()
@@ -102,7 +115,7 @@ public class TaskResolver {
                      .collect(Collectors.toList());
     }
 
-    public void seventhTask() {
+    public static void seventhTask() {
         List<Transaction> transactions = Arrays.asList(
             new Transaction(100, "Food"),
             new Transaction(10, "Transport")
@@ -117,8 +130,33 @@ public class TaskResolver {
                     Transaction::getCategory,
                     Collectors.summingDouble(Transaction::getSum)
         ));
-        
+
         Map<String, Double> result = classifier.apply(transactions);
     }
 
+    public static Optional<String> eighthTask(List<Product> products) {
+        return products.stream()
+            .sorted(Comparator.comparingDouble(Product::getPrice).reversed())
+            .skip(1)
+            .map(Product::getName)
+            .findFirst();
+    }
+
+    public static List<String> ninthTask(Map<Integer, Optional<String>> products) {
+        return products.values().stream()
+            .flatMap(Optional::stream)
+            .map(String::toUpperCase)
+            .collect(Collectors.toList());
+    }
+
+    public static Optional<String> tenthTask(Map<String, List<Integer>> cityTemperatures) {
+        return cityTemperatures.entrySet().stream()
+            .max(Comparator.comparingDouble(entry -> 
+                entry.getValue().stream()
+                    .mapToInt(Integer::intValue)
+                    .average()
+                    .orElse(Double.NEGATIVE_INFINITY)
+
+            )).map(Map.Entry::getKey);
+    }
 }
