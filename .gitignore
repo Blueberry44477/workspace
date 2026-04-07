@@ -59,6 +59,9 @@ packages/
 *.resharper
 *.ide.*
 
+# MacOS
+.DS_Store
+
 #########################
 # Programming Languages #
 #########################
