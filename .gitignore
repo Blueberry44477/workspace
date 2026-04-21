@@ -71,6 +71,10 @@ packages/
 bin/
 obj/
 
+# python
+.env
+*.session
+
 # Java
 *.class
 
@@ -85,7 +89,3 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
-
-# Залишаємо тільки файли з розширенням .cpp
-!*.cpp
-!*.vscode
