@@ -78,9 +78,11 @@ obj/
 
 # Java
 *.class
+
 !application.properties
 !application.properties.example
 application-secret.properties
+db.properties
 
 # Created by https://gitignore.org
 # Maven.gitignore
@@ -96,6 +98,9 @@ buildNumber.properties
 .mvn/timing.properties
 # https://maven.apache.org/tools/wrapper/#Usage_with_or_without_Binary_JAR
 .mvn/wrapper/maven-wrapper.jar
+
+!mvnw
+!mvnw.cmd
 
 # Eclipse m2e generated files
 # Eclipse Core
