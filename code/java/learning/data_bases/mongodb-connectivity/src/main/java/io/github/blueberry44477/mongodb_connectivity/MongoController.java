@@ -18,7 +18,6 @@ public class MongoController {
         model.addAttribute("articleTitle", mongoService.getArticleTitle("69df5264fb7ad7aa369eb9cc"));
         model.addAttribute("articlesByCat", mongoService.findArticlesByCategory("69df508cfb7ad7aa369eb9c4"));
         model.addAttribute("authorsArticleCount", mongoService.getAuthorsArticleCount());
-        model.addAttribute("authorStats", mongoService.getArticleCountByAuthorName());
         model.addAttribute("planStats", mongoService.getSubscribersPerPlan());
         model.addAttribute("todaySent", mongoService.getMessagesSentToday());
         model.addAttribute("popularity", mongoService.getTopicPopularity());

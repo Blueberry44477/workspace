@@ -63,40 +63,20 @@ public class MongoService {
             .into(new ArrayList<>());
     }
 
-
     public List<Document> findQueuedMessages(int subscriberId) {
         return database.getCollection("messages")
                 .find(and(eq("subscriber.$id", subscriberId), eq("status", "в черзі")))
                 .into(new ArrayList<>());
     }
 
-    // public List<Document> getAuthorsArticleCount() {
-    //     return database.getCollection("articles").aggregate(Arrays.asList(
-    //         group("author.$id", sum("subscriberCount", 1)),
-    //         lookup("authors", "_id", "_id", "authorDetails"),
-    //         unwind("$authorDetails"),
-    //         project(Projections.fields(
-    //             Projections.excludeId(),
-    //             Projections.computed("authorId", "$_id"),
-    //             Projections.computed("name", "$authorDetails.name"),
-    //             Projections.include("articleCount")))))
-    //         .into(new ArrayList<>());
-    // }
-
     public List<Document> getAuthorsArticleCount() {
     return database.getCollection("articles").aggregate(Arrays.asList(
-        // 1. Виправлено "authod" на "author" та назву лічильника на "articleCount"
-        Aggregates.group("$author.$id", Accumulators.sum("articleCount", 1)),
-        
-        // 2. Виправлено "id" на "_id" (в MongoDB системне поле завжди з підкресленням)
-        Aggregates.lookup("authors", "_id", "_id", "authorDetails"),
-        
-        Aggregates.unwind("$authorDetails"),
-        
-        Aggregates.project(Projections.fields(
+        group("$author.$id", Accumulators.sum("articleCount", 1)),
+        lookup("authors", "_id", "_id", "authorDetails"),
+        unwind("$authorDetails"),
+        project(Projections.fields(
             Projections.excludeId(),
             Projections.computed("authorId", "$_id"),
-            // 3. Це поле має збігатися з тим, що ви очікуєте в Thymeleaf
             Projections.computed("name", "$authorDetails.name"), 
             Projections.include("articleCount")
         ))
@@ -115,22 +95,9 @@ public class MongoService {
                 .getDeletedCount();
     }
 
-    public List<Document> getArticleCountByAuthorId(String id) {
-        return database.getCollection("articles").aggregate(Arrays.asList(
-                group("$author", sum("totalArticles", new ObjectId(id)))
-        )).into(new ArrayList<>());
-    }
-
-    public List<Document> getArticleCountByAuthorName() {
-        return database.getCollection("articles").aggregate(Arrays.asList(
-                lookup("authors", "author", "_id", "author_details"),
-                unwind("$author_details"),
-                group("$author_details.name", sum("totalArticles", 1))
-        )).into(new ArrayList<>());
-    }
-
     public List<Document> getSubscribersPerPlan() {
-        return database.getCollection("subscribers").aggregate(Arrays.asList(
+        return database.getCollection("subscribers")
+            .aggregate(Arrays.asList(
                 group("$plan", sum("count", 1))
         )).into(new ArrayList<>());
     }
@@ -151,6 +118,4 @@ public class MongoService {
                 sort(descending("subscriberCount"))
         )).into(new ArrayList<>());
     }
-
-    
 }

@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Mongo Stats</title>
+    <title>Internet Mailing Stats</title>
     <style>
-        table { border-collapse: collapse; width: 50%; margin-bottom: 20px; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        table { 
+            border-collapse: collapse; 
+            width: 50%; 
+            margin-bottom: 20px; 
+        }
+
+        th, td { 
+            border: 1px solid black; 
+            padding: 8px; 
+            text-align: left; 
+        }
     </style>
 </head>
+
 <body>
     <h1>Internet Mailing</h1>
 
@@ -42,15 +52,6 @@
         <p th:if="${articlesByCat.isEmpty()}">Not Found.</p>
     </div>
 
-    <h2>Author statistics</h2>
-    <table>
-        <tr><th>Name</th><th>Written Articles</th></tr>
-        <tr th:each="stat: ${authorStats}">
-            <td th:text="${stat.get('_id')}"></td>
-            <td th:text="${stat.get('totalArticles')}"></td>
-        </tr>
-    </table>
-
     <div>
         <h2>Authors Article Count</h2>
         <table>
@@ -69,16 +70,7 @@
         </table>
     </div>
 
-    <h2>Популярність тем</h2>
-    <table>
-        <tr><th>Тема</th><th>Кількість підписників</th></tr>
-        <tr th:each="item : ${popularity}">
-            <td th:text="${item.get('_id')}"></td>
-            <td th:text="${item.get('subscriberCount')}"></td>
-        </tr>
-    </table>
-
-    <h2>Повідомлень відправлено сьогодні</h2>
+    <h2>Messages Sent Today</h2>
     <p th:text="${todaySent != null ? todaySent.get('messages_sent_today') : 0}"></p>
 </body>
 </html>
