@@ -1,0 +1,172 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+   
+    <changeSet id="03-05-2026-001" author="Vitalii Skubach">
+        <createTable tableName="author">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="pkey_author"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)"/>
+            <column name="bio" type="text"/>
+        </createTable>
+        
+        <!-- CATEGORY -->
+        <createTable tableName="category">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="pkey_category"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)"/>
+            <column name="parent_id" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="category" 
+                                 baseColumnNames="parent_id"
+                                 constraintName="fk_category_parent"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"
+                                 onDelete="SET NULL" 
+                                 onUpdate="CASCADE"/>
+
+        <!-- ARTICLE -->
+        <createTable tableName="article">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="pkey_article"/>
+            </column>
+
+            <column name="title" type="VARCHAR(100)"/>
+            <column name="content" type="text"/>
+
+            <!-- We have Many-to-Many, so we create a junction table "article_author" -->
+            <!-- <column name="author_id" type="bigint"/> -->
+
+            <!-- Many-To-One -->
+            <column name="category_id" type="bigint"/>
+        </createTable>
+
+        <!-- Article -> Category -->
+        <addForeignKeyConstraint baseTableName="article" 
+                                 baseColumnNames="category_id"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_article_category"
+                                 onDelete="SET NULL" 
+                                 onUpdate="CASCADE"/>
+
+        <!-- TOPIC -->
+        <createTable tableName="topic">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false"
+                            primaryKey="true"
+                            primaryKeyName="pkey_topic"/>
+            </column>
+
+            <column name="title" type="VARCHAR(300)"/>
+            <column name="is_actual" type="boolean"/>
+        </createTable>
+
+        <!-- AUTHOR <-> ARTICLE - JUNCTION TABLE. -->
+        <createTable tableName="author_article">
+            <column name="author_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="article_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Composite primary key. -->
+        <addPrimaryKey tableName="author_article" 
+                       columnNames="author_id, article_id"
+                       constraintName="pk_author_article"/>
+
+        <addForeignKeyConstraint baseTableName="author_article" 
+                                 baseColumnNames="author_id"
+                                 referencedTableName="author" 
+                                 referencedColumnNames="id"
+                                 constraintName="fk_author_article_author"/>
+
+        <addForeignKeyConstraint baseTableName="author_article" 
+                                 baseColumnNames="article_id"
+                                 referencedTableName="article" 
+                                 referencedColumnNames="id"
+                                 constraintName="fk_author_article_article"/>
+        
+
+        <!-- ARTICLE <-> TOPIC - JUNCTION TABLE -->
+        <createTable tableName="article_topic">
+            <column name="article_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="topic_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    
+        <!-- Composite key -->
+        <addPrimaryKey tableName="article_topic" 
+                       columnNames="article_id, topic_id"
+                       constraintName="pk_article_topic"/>
+    
+        <addForeignKeyConstraint baseTableName="article_topic" 
+                                 baseColumnNames="article_id"
+                                 referencedTableName="article" 
+                                 referencedColumnNames="id"
+                                 constraintName="fk_article_topic_article"/>
+    
+        <addForeignKeyConstraint baseTableName="article_topic" 
+                                 baseColumnNames="topic_id"
+                                 referencedTableName="topic" 
+                                 referencedColumnNames="id"
+                                 constraintName="fk_article_topic_topic"/>
+        
+        <!-- KEYWORD -->
+        <createTable tableName="keyword">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="pkey_keyword"/>
+            </column>
+
+            <column name="word" type="VARCHAR(30)"/>
+        </createTable>
+
+        <!-- ARTICLE <-> KEYWORD - JUNCTION TABLE -->
+        <createTable tableName="article_keyword">
+            <column name="article_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="keyword_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Composite key -->
+        <addPrimaryKey tableName="article_keyword" 
+                       columnNames="article_id, keyword_id"
+                       constraintName="pk_article_keyword"/>
+
+        <addForeignKeyConstraint baseTableName="article_keyword" 
+                                 baseColumnNames="article_id"
+                                 referencedTableName="article" 
+                                 referencedColumnNames="id"
+                                 constraintName="fk_article_keyword_article"/>
+    
+        <addForeignKeyConstraint baseTableName="article_keyword" 
+                                 baseColumnNames="keyword_id"
+                                 referencedTableName="keyword" 
+                                 referencedColumnNames="id"
+                                 constraintName="fk_article_keyword_keyword"/>
+    </changeSet>
+</databaseChangeLog>
