@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: lab08-spring-boot-rest
