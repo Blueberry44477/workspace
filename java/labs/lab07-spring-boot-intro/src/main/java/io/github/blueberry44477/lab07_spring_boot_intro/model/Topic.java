@@ -1,16 +1,15 @@
 package io.github.blueberry44477.lab07_spring_boot_intro.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Topic {
-    private String id;
+    @NonNull private String id;
     private String name;
     private Boolean isActual;
 }

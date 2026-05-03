@@ -3,17 +3,16 @@ package io.github.blueberry44477.lab07_spring_boot_intro.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
-    private String id;
-    private String name;
+    @NonNull private String id;
+    @NonNull private String name;
 
     @JsonBackReference
     private Category parent;

@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.NonNull;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Article {
-    private String id;
+    @NonNull private String id;
     private String title;
     private String content;
-    
+
     private Author author;
     private Category category;
 
