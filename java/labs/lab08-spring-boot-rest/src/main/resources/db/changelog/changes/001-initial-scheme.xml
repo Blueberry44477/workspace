@@ -5,7 +5,10 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
    
-    <changeSet id="03-05-2026-001" author="Vitalii Skubach">
+    <changeSet id="04-05-2026-001" 
+               author="Vitalii Skubach">
+        <comment>Create initial scheme</comment>
+
         <createTable tableName="author">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints nullable="false"

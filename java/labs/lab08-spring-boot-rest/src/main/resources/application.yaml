@@ -2,11 +2,12 @@ spring:
   application:
     name: lab08-spring-boot-rest
   liquibase:
+    enabled: true
     change-log: classpath:/db/changelog/changelog-master.xml
   datasource:
-    url: jdbc:mysql://localhost:3306/internetMailing?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/internetMailing?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
     username: root
-    password: 
+    password:
     hikari:
       minimum-idle: 1
       connection-timeout: 60000
@@ -14,3 +15,8 @@ spring:
       leak-detection-threshold: 10000
       idle-timeout: 120000
     type: com.zaxxer.hikari.HikariDataSource
+# logging:
+#   level:
+#     root: INFO
+#     org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLogger: DEBUG
+#     liquibase: DEBUG
