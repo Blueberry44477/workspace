@@ -3,11 +3,11 @@ package io.github.blueberry44477.lab08_spring_boot_rest.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.model.Author;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.AuthorDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,39 +28,36 @@ public class AuthorController {
     private final AuthorService service;
 
     @GetMapping
-    public Set<Author> getAuthors() {
+    public List<AuthorDto> getAuthors() {
         return service.getAuthors();
     }
     
-
     @GetMapping("/{id}")
-    public ResponseEntity<Author> getAuthorById(@PathVariable String id) {
+    public ResponseEntity<AuthorDto> getAuthorById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getAuthorById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Author> addAuthor(@RequestBody Author author) {
-        service.addAuthor(author);
-        return new ResponseEntity<>(author, HttpStatus.CREATED);
+    public ResponseEntity<AuthorDto> addAuthor(@RequestBody AuthorDto authorDto) {
+        AuthorDto createdAuthor = service.addAuthor(authorDto);
+        return new ResponseEntity<>(createdAuthor, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAuthorById(@PathVariable String id) {
+    public void deleteAuthorById(@PathVariable Long id) {
         service.deleteAuthorById(id);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateAuthor(@PathVariable String id, @RequestBody Author author) {
-        author.setId(id);
-        service.updateAuthor(author);
+    public void updateAuthor(@PathVariable Long id, @RequestBody AuthorDto authorDto) {
+        service.updateAuthor(id, authorDto);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void patchAuthor(@PathVariable String id, @RequestBody Author author) {
-        author.setId(id);
-        service.patchAuthor(author);
+    public void patchAuthor(@PathVariable Long id, @RequestBody AuthorDto authorDto) {
+        service.patchAuthor(id, authorDto);
     }
 }

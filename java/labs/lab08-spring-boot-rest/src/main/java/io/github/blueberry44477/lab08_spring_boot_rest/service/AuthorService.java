@@ -1,11 +1,15 @@
 package io.github.blueberry44477.lab08_spring_boot_rest.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.AuthorDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.exception.EntityNotFoundException;
+import io.github.blueberry44477.lab08_spring_boot_rest.mapper.AuthorMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Author;
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.AuthorRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,44 +18,50 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class AuthorService {
     private final AuthorRepository repository;
+    private final AuthorMapStruct authorMapper;
 
-    public Set<Author> getAuthors() {
-        log.info("Extracting authors from mocked repository");
-        return repository.getAuthors();
+    public List<AuthorDto> getAuthors() {
+        return authorMapper.toDtoList(repository.findAll());
     }
 
-    public Author getAuthorById(String id) {
-        log.info("Extracting authors by id from mocked repository");
-        return repository.getAuthorById(id);
+    public AuthorDto getAuthorById(Long id) {
+        return repository.findById(id)
+                         .map(authorMapper::toDto)
+                         .orElseThrow(() -> new EntityNotFoundException("Author not found with id: " + id));
     }
 
-    public void addAuthor(Author author) {
-        log.info("Adding author {}", author);
-        repository.addAuthor(author);
+    @Transactional
+    public AuthorDto addAuthor(AuthorDto authorDto) {
+        Author author = authorMapper.toEntity(authorDto);
+        Author savedAuthor = repository.save(author);
+        return authorMapper.toDto(savedAuthor);
     }
 
-    public void deleteAuthorById(String id) {
-        log.info("Deleting author {}", id);
-        repository.deleteAuthorById(id);
-    }
-
-    public void updateAuthor(Author author) {
-        log.info("Performing full update for author {}", author.getId());
-        repository.updateAuthor(author);
-    }
-
-    public void patchAuthor(Author author) {
-        log.info("Patching author {}", author.getId());
-
-        Author existing = repository.getAuthorById(author.getId());
-
-        if (author.getName() != null) {
-            existing.setName(author.getName());
+    @Transactional
+    public void deleteAuthorById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Author not found");
         }
-        if (author.getBio() != null) {
-            existing.setBio(author.getBio());
-        }
+        repository.deleteById(id);
+    }
 
-        repository.updateAuthor(existing);
+    @Transactional
+    public void updateAuthor(Long id, AuthorDto authorDto) {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Author not found");
+        }
+        Author author = authorMapper.toEntity(authorDto);
+        author.setId(id); // Гарантуємо, що оновлюємо саме потрібний запис
+        repository.save(author);
+    }
+
+    @Transactional
+    public void patchAuthor(Long id, AuthorDto authorDto) {
+        Author existing = repository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Author not found"));
+
+        authorMapper.updateEntityFromDto(authorDto, existing);
+        
+        repository.save(existing);
     }
 }
