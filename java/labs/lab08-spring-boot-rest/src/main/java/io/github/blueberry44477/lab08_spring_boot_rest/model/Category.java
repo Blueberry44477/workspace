@@ -19,13 +19,11 @@ import lombok.experimental.Accessors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Accessors(chain = true)
 @Table(name = "category")
 public class Category {
     @Id
-    @EqualsAndHashCode.Include
     private Long id;
 
     @NonNull private String name;

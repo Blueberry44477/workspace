@@ -20,13 +20,11 @@ import lombok.experimental.Accessors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true) // Only use marked fields.
 @Entity
 @Accessors(chain=true)
 @Table(name = "keyword")
 public class Keyword {
     @Id
-    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
