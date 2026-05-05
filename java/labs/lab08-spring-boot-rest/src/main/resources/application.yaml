@@ -1,6 +1,11 @@
 spring:
   application:
     name: lab08-spring-boot-rest
+  jpa:
+    hibernate:
+      ddl-auto: none
+    generate-ddl: false
+    show-sql: true
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/changelog-master.xml
