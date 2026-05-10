@@ -10,11 +10,17 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.AuthorDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Author;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(
+    componentModel = "spring", 
+    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+    uses = {
+        ArticleMapStruct.class
+    })
 public interface AuthorMapStruct {
     AuthorDto toDto(Author entity);
-    Author toEntity(AuthorDto authorDto);
     List<AuthorDto> toDtoList(List<Author> authors);
+    
+    Author toEntity(AuthorDto authorDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDto(AuthorDto dto, @MappingTarget Author entity);
