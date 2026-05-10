@@ -3,6 +3,8 @@ package io.github.blueberry44477.lab08_spring_boot_rest.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -23,9 +25,11 @@ import lombok.experimental.Accessors;
 @Table(name = "category")
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull private String name;
+    @NonNull 
+    private String name;
     
     @ManyToOne
     @JsonBackReference

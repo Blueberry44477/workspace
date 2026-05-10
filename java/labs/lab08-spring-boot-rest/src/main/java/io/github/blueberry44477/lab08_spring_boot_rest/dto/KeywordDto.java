@@ -4,8 +4,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,16 +15,10 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AuthorDto {
+public class KeywordDto {
     private Long id;
+    private String word;
 
-    @NotBlank
-    @Size(min = 2, max = 100)
-    private String name;
-    
-    @Size(max = 10000)
-    private String bio;
-    
-    @JsonIgnoreProperties("authors")
+    @JsonIgnoreProperties("keywords")
     private Set<ArticleDto> articles;
 }
