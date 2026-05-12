@@ -3,7 +3,6 @@ package io.github.blueberry44477.mongodb_connectivity;
 import com.mongodb.client.*;
 import com.mongodb.client.model.*;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
