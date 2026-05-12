@@ -2,8 +2,11 @@ package io.github.blueberry44477.lab08_spring_boot_rest.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +24,8 @@ public class TopicController {
     private final TopicService service;
 
     @GetMapping
-    public List<TopicDto> getTopics() {
-        return service.getTopics();
+    public Page<TopicDto> getTopics(@NonNull Pageable pageable) {
+        return service.getTopics(pageable);
     }
 
     @PostMapping

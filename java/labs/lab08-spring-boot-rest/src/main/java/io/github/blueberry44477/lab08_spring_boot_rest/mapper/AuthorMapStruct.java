@@ -21,6 +21,7 @@ public interface AuthorMapStruct {
     List<AuthorDto> toDtoList(List<Author> authors);
     
     Author toEntity(AuthorDto authorDto);
+    List<Author> toEntityList(List<AuthorDto> authorDtoList);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDto(AuthorDto dto, @MappingTarget Author entity);

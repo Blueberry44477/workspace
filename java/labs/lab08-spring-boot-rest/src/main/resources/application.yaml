@@ -6,6 +6,11 @@ spring:
       ddl-auto: none
     generate-ddl: false
     show-sql: true
+    open-in-view: false
+  data:
+    web:
+      pageable:
+        serialization-mode: via-dto
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/changelog-master.xml

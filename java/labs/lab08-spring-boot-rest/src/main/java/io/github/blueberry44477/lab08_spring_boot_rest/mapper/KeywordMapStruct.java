@@ -17,7 +17,6 @@ import io.github.blueberry44477.lab08_spring_boot_rest.model.Keyword;
 public interface KeywordMapStruct {
     @Mapping(target = "articles", ignore = true)
     KeywordDto toDto(Keyword entity);
-    
     List<KeywordDto> toDtoList(List<Keyword> keywords);
 
     Keyword toEntity(KeywordDto keywordDto);

@@ -2,9 +2,13 @@ package io.github.blueberry44477.lab08_spring_boot_rest.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.AuthorDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.CategoryDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.exception.EntityNotFoundException;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.AuthorMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Author;
@@ -20,8 +24,8 @@ public class AuthorService {
     private final AuthorRepository repository;
     private final AuthorMapStruct authorMapper;
 
-    public List<AuthorDto> getAuthors() {
-        return authorMapper.toDtoList(repository.findAll());
+    public Page<AuthorDto> getAuthors(@NonNull Pageable pageable) {
+        return repository.findAll(pageable).map(authorMapper::toDto);
     }
 
     public AuthorDto getAuthorById(Long id) {
@@ -35,6 +39,13 @@ public class AuthorService {
         Author author = authorMapper.toEntity(authorDto);
         Author savedAuthor = repository.save(author);
         return authorMapper.toDto(savedAuthor);
+    }
+
+    @Transactional
+    public List<AuthorDto> addAuthors(List<AuthorDto> authorDtoList) {
+        List<Author> authorList = authorMapper.toEntityList(authorDtoList);
+        List<Author> savedAuthors = repository.saveAll(authorList);
+        return authorMapper.toDtoList(savedAuthors);
     }
 
     @Transactional

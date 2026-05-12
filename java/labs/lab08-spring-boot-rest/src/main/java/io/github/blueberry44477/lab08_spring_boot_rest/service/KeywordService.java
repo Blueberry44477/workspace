@@ -2,7 +2,9 @@ package io.github.blueberry44477.lab08_spring_boot_rest.service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.KeywordDto;
@@ -18,8 +20,8 @@ public class KeywordService {
     private final KeywordRepository repository;
     private final KeywordMapStruct keywordMapper;
 
-    public List<KeywordDto> getKeywords() {
-        return keywordMapper.toDtoList(repository.findAll());
+    public Page<KeywordDto> getKeywords(@NonNull Pageable pageable) {
+        return repository.findAll(pageable).map(keywordMapper::toDto);
     }
 
     @Transactional

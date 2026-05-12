@@ -9,8 +9,11 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -20,7 +23,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-
 @RestController
 @RequestMapping("/api/v1/author")
 @RequiredArgsConstructor
@@ -28,8 +30,8 @@ public class AuthorController {
     private final AuthorService service;
 
     @GetMapping
-    public List<AuthorDto> getAuthors() {
-        return service.getAuthors();
+    public Page<AuthorDto> getAuthors(@NonNull Pageable pageable) {
+        return service.getAuthors(pageable);
     }
     
     @GetMapping("/{id}")
@@ -41,6 +43,13 @@ public class AuthorController {
     public ResponseEntity<AuthorDto> addAuthor(@RequestBody AuthorDto authorDto) {
         AuthorDto createdAuthor = service.addAuthor(authorDto);
         return new ResponseEntity<>(createdAuthor, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<List<AuthorDto>> addAuthors(
+        @RequestBody List<AuthorDto> authorDtoList
+    ) {
+        return new ResponseEntity<>(service.addAuthors(authorDtoList), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

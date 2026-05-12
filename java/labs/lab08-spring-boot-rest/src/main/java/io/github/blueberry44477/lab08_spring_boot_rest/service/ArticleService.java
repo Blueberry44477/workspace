@@ -1,9 +1,11 @@
 package io.github.blueberry44477.lab08_spring_boot_rest.service;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.ArticleDto;
@@ -35,8 +37,8 @@ public class ArticleService {
 
     private final ArticleMapStruct articleMapper;
 
-    public List<ArticleDto> getArticles() {
-        return articleMapper.toDtoList(repository.findAll());
+    public Page<ArticleDto> getArticles(@NonNull Pageable pageable) {
+        return repository.findAll(pageable).map(articleMapper::toDto);
     }
 
     @Transactional

@@ -2,6 +2,9 @@ package io.github.blueberry44477.lab08_spring_boot_rest.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.TopicDto;
@@ -18,8 +21,8 @@ public class TopicService {
     private final TopicRepository repository;
     private final TopicMapStruct topicMapper;
 
-    public List<TopicDto> getTopics() {
-        return topicMapper.toDtoList(repository.findAll());
+    public Page<TopicDto> getTopics(@NonNull Pageable pageable) {
+        return repository.findAll(pageable).map(topicMapper::toDto);
     }
 
     @Transactional
