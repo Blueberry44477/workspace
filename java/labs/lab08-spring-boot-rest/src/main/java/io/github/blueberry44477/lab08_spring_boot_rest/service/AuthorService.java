@@ -6,14 +6,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.AuthorDto;
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.CategoryDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.exception.EntityNotFoundException;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.AuthorMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Author;
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.AuthorRepository;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

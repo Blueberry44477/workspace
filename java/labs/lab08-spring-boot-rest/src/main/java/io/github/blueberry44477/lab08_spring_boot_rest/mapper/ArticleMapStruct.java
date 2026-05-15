@@ -19,11 +19,11 @@ import io.github.blueberry44477.lab08_spring_boot_rest.model.Article;
 )
 public interface ArticleMapStruct {
     ArticleDto toDto(Article entity);
+    List<ArticleDto> toDtoList(List<Article> articles);
     
     @Mapping(target = "category", ignore = true)
     @Mapping(target = "authors", ignore = true)
     @Mapping(target = "keywords", ignore = true)
     @Mapping(target = "topics", ignore = true)
     Article toEntity(ArticleDto articleDto);
-    List<ArticleDto> toDtoList(List<Article> articles);
 }

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.ArticleDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.ArticleMapStruct;
@@ -20,7 +21,6 @@ import io.github.blueberry44477.lab08_spring_boot_rest.repository.AuthorReposito
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.CategoryRepository;
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.KeywordRepository;
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.TopicRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

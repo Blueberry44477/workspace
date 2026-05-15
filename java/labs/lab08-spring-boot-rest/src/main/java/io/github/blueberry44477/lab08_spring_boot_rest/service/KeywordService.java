@@ -6,12 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.KeywordDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.KeywordMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Keyword;
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.KeywordRepository;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 
 @Service

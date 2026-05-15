@@ -6,14 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.CategoryDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.CategoryDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.CategoryMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Category;
-import io.github.blueberry44477.lab08_spring_boot_rest.model.Category;
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.CategoryRepository;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
