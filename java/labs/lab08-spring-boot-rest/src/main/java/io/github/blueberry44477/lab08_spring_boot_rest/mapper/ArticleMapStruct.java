@@ -18,7 +18,9 @@ import io.github.blueberry44477.lab08_spring_boot_rest.model.Article;
     }
 )
 public interface ArticleMapStruct {
+    @Mapping(target = "authors", ignore = true)
     ArticleDto toDto(Article entity);
+    
     List<ArticleDto> toDtoList(List<Article> articles);
     
     @Mapping(target = "category", ignore = true)

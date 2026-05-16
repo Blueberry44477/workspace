@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,11 +12,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 
 @Getter
@@ -35,14 +36,11 @@ public class Author {
     private String bio;
 
 
-    @ManyToMany // One side is the "owner" (where the join table is defined), 
-                // and the other is the "inverse" side.
-    // Проміжна таблиця.
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "author_article",
         joinColumns = @JoinColumn(name = "author_id"),
         inverseJoinColumns = @JoinColumn(name = "article_id")
     )
-    @ToString.Exclude // Prevent circular references in logs
     private Set<Article> articles = new HashSet<>();
 }

@@ -39,10 +39,11 @@ public class AuthorController {
         return ResponseEntity.ok(service.getAuthorById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<AuthorDto> addAuthor(@RequestBody AuthorDto authorDto) {
-        AuthorDto createdAuthor = service.addAuthor(authorDto);
-        return new ResponseEntity<>(createdAuthor, HttpStatus.CREATED);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AuthorDto> addAuthor(
+        @RequestBody CreateAuthorRequest request
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.addAuthor(request));
     }
 
     @PostMapping("/batch")
