@@ -1,4 +1,4 @@
-package io.github.blueberry44477.lab08_spring_boot_rest.dto;
+package io.github.blueberry44477.lab08_spring_boot_rest.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
