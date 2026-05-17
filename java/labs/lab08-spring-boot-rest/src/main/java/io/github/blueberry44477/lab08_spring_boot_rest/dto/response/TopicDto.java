@@ -1,4 +1,4 @@
-package io.github.blueberry44477.lab08_spring_boot_rest.dto;
+package io.github.blueberry44477.lab08_spring_boot_rest.dto.response;
 
 import java.util.Set;
 
@@ -16,15 +16,18 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
+@Schema(description = "Data Transfer Object for Topic information")
 public class TopicDto {
-    @Schema(
-        example = "101",
-        accessMode = Schema.AccessMode.READ_ONLY
-    )
+    @Schema(example = "101",accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
+
+    @Schema(description = "Topic's title")
     private String title;
+
+    @Schema(description = "The flag for determining if the article is actual")
     private Boolean isActual;
 
+    @Schema(description = "Articles which correspond to this topic")
     @JsonIgnoreProperties("topics")
     private Set<ArticleDto> articles;
 }

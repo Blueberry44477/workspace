@@ -3,8 +3,8 @@ package io.github.blueberry44477.lab08_spring_boot_rest.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.AuthorDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.request.CreateAuthorRequest;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.AuthorDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.service.AuthorService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,6 +46,7 @@ public class AuthorController {
 
     @Operation(
         summary = "Retrieve authors page",
+        description = "",
         responses = {
             @ApiResponse(
                 responseCode = "200",

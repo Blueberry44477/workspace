@@ -1,4 +1,4 @@
-package io.github.blueberry44477.lab08_spring_boot_rest.dto;
+package io.github.blueberry44477.lab08_spring_boot_rest.dto.response;
 
 import java.util.Set;
 
@@ -18,14 +18,10 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@Schema(description = "DTO for Author information")
+@Schema(description = "Data Transfer Object for Author information")
 public class AuthorDto {
-    @Schema(
-        example = "101",
-        accessMode = Schema.AccessMode.READ_ONLY
-    )
+    @Schema(example = "101", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
-
 
     @Schema(description = "Author's name", example = "Taras Shevchenko")
     @NotBlank

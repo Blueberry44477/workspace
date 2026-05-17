@@ -8,8 +8,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.ArticleDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.request.CreateArticleRequest;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.ArticleDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.exception.EntityNotFoundException;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.ArticleMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Article;

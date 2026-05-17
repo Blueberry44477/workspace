@@ -5,7 +5,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.CategoryDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.CategoryDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Category;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

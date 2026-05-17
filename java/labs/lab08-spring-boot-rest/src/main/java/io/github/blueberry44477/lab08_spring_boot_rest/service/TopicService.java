@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.TopicDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.TopicDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.TopicMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Topic;
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.TopicRepository;

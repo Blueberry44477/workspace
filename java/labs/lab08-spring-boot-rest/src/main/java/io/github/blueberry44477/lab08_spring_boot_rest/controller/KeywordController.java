@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.KeywordDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.KeywordDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.service.KeywordService;
 import lombok.RequiredArgsConstructor;
 

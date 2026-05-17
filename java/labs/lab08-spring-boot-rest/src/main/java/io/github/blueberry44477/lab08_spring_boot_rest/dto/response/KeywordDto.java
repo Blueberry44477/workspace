@@ -1,4 +1,4 @@
-package io.github.blueberry44477.lab08_spring_boot_rest.dto;
+package io.github.blueberry44477.lab08_spring_boot_rest.dto.response;
 
 import java.util.Set;
 
@@ -16,14 +16,15 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
+@Schema(description = "Data Transfer Object for keyword information")
 public class KeywordDto {
-    @Schema(
-        example = "101",
-        accessMode = Schema.AccessMode.READ_ONLY
-    )
+    @Schema(example = "101", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
+
+    @Schema(description = "The keyword", example = "programming")
     private String word;
 
+    @Schema(description = "The articles, which have this keyword")
     @JsonIgnoreProperties("keywords")
     private Set<ArticleDto> articles;
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.TopicDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.TopicDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Topic;
 
 @Mapper(

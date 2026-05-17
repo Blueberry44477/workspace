@@ -8,7 +8,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.CategoryDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.CategoryDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.CategoryMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Category;
 import io.github.blueberry44477.lab08_spring_boot_rest.repository.CategoryRepository;

@@ -9,8 +9,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.AuthorDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.request.CreateAuthorRequest;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.AuthorDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.exception.EntityNotFoundException;
 import io.github.blueberry44477.lab08_spring_boot_rest.mapper.AuthorMapStruct;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Article;

@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.AuthorDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.AuthorDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Author;
 
 @Mapper(

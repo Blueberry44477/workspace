@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import io.github.blueberry44477.lab08_spring_boot_rest.dto.KeywordDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.response.KeywordDto;
 import io.github.blueberry44477.lab08_spring_boot_rest.model.Keyword;
 
 @Mapper(
