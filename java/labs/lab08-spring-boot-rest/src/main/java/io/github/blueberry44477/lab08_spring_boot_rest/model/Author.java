@@ -35,7 +35,6 @@ public class Author {
 
     private String bio;
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "author_article",

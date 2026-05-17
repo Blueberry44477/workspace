@@ -1,26 +1,30 @@
 package io.github.blueberry44477.lab08_spring_boot_rest.dto.request;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
 
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true)
 @Schema(description = "Request object for creating a new author")
 public class CreateAuthorRequest {
-    @NotBlank(message = "Name must not be blank")
     @Schema(
-        example = "Ivan Franko",
-        description = "The full name of the author"
+        description = "Author's full name",
+        example = "Ivan Franko"
     )
+    @NotBlank(message = "Name must not be blank")
     private String name;
 
     @Schema(
@@ -32,8 +36,8 @@ public class CreateAuthorRequest {
     // @NotNull(message = "Article IDs must not be null")
     @JsonProperty(value = "article_ids")
     @Schema(
-        example = "[1, 2, 3]",
-        description = "List of associated articles ids"
+        description = "List of associated articles IDs",
+        example = "[1, 2, 3]"
     )
-    private List<Long> articleIds;
+    private Set<Long> articleIds;
 }

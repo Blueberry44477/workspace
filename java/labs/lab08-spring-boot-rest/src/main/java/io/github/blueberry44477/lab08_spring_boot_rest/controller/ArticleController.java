@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.blueberry44477.lab08_spring_boot_rest.dto.ArticleDto;
+import io.github.blueberry44477.lab08_spring_boot_rest.dto.request.CreateArticleRequest;
 import io.github.blueberry44477.lab08_spring_boot_rest.service.ArticleService;
 
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +30,15 @@ public class ArticleController {
         return service.getArticles(pageable);
     }
 
-    @PostMapping
-    public ResponseEntity<ArticleDto> addArticle(@RequestBody ArticleDto articleDto) {
-        ArticleDto createdArticle = service.addArticle(articleDto);
-        return new ResponseEntity<>(createdArticle, HttpStatus.CREATED);
+    // @PostMapping
+    // public ResponseEntity<ArticleDto> addArticle(@RequestBody ArticleDto articleDto) {
+    //     ArticleDto createdArticle = service.addArticle(articleDto);
+    //     return new ResponseEntity<>(createdArticle, HttpStatus.CREATED);
+    // }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArticleDto> addArticle(@RequestBody CreateArticleRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.addArticle(request));
     }
     
 }

@@ -55,7 +55,7 @@ public class AuthorService {
 
             if (associatedArticles.size() != request.getArticleIds().size())
                 throw new EntityNotFoundException(
-            "One or more article IDs provided do not exist.");
+                    "One or more article IDs provided do not exist.");
 
             for (Article article : associatedArticles) {
                 article.getAuthors().add(author);

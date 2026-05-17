@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,14 +36,14 @@ public class Article {
 
     private String content;
 
-    @ManyToMany(mappedBy = "articles") // Inverse side.
-    private Set<Author> authors = new HashSet<>();
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "articles")
+    private Set<Author> authors = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "article_topic",
         joinColumns = @JoinColumn(name = "article_id"),
@@ -50,7 +51,7 @@ public class Article {
     )
     private Set<Topic> topics = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "article_keyword",
         joinColumns = @JoinColumn(name = "article_id"),
